@@ -28,7 +28,8 @@ const runFromCommandLine = (): void => {
   console.log(calculateBmi(height, weight))
 }
 
-if (process.argv[1]?.endsWith('bmiCalculator.ts')) {
+// Komentorivikäyttö tehtävää varten
+if (process.argv[1] === import.meta.filename) {
   try {
     runFromCommandLine()
   } catch (error) {
