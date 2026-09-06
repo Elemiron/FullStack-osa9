@@ -1,4 +1,4 @@
-interface ExerciseResult {
+export interface ExerciseResult {
   periodLength: number
   trainingDays: number
   success: boolean
@@ -22,6 +22,11 @@ const getRating = (average: number, target: number): Pick<ExerciseResult, 'ratin
 }
 
 export const calculateExercises = (dailyExercises: number[], target: number): ExerciseResult => {
+  if (!Number.isFinite(target) || target < 0 || dailyExercises.length === 0 ||
+      dailyExercises.some((hours) => !Number.isFinite(hours) || hours < 0)) {
+    throw new Error('target and daily exercise hours must be valid non-negative numbers')
+  }
+
   // Jakson pituus määräytyy annettujen päivien lukumäärästä.
   const periodLength = dailyExercises.length
 
@@ -47,4 +52,23 @@ export const calculateExercises = (dailyExercises: number[], target: number): Ex
   }
 }
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2))
+const runFromCommandLine = (): void => {
+  const argumentsFromCommandLine = process.argv.slice(2)
+  if (argumentsFromCommandLine.length < 2) {
+    throw new Error('usage: npm run calculateExercises -- <target> <daily exercise hours...>')
+  }
+
+  const [targetArgument, ...dailyExerciseArguments] = argumentsFromCommandLine
+  const target = Number(targetArgument)
+  const dailyExercises = dailyExerciseArguments.map(Number)
+  console.log(calculateExercises(dailyExercises, target))
+}
+
+if (process.argv[1]?.endsWith('exerciseCalculator.ts')) {
+  try {
+    runFromCommandLine()
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : error)
+    process.exitCode = 1
+  }
+}
