@@ -7,11 +7,19 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "tsc": "tsc",
     "calculateBmi": "ts-node bmiCalculator.ts",
-    "calculateExercises": "ts-node exerciseCalculator.ts"
+    "calculateExercises": "ts-node exerciseCalculator.ts",
+    "start": "node index.ts",
+    "dev": "concurrently \"tsc --watch\" \"node --watch index.ts\""
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
+    "concurrently": "^10.0.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
   }
 }
