@@ -1,8 +1,9 @@
 name: Health app E2E Tests
 
 on:
+  # T.9.8: suoritetaan healthappin testit main- ja master-haarojen pusheista.
   push:
-    branches: [ xmain, xmaster ]
+    branches: [ main, master ]
 
 jobs:
   test:
