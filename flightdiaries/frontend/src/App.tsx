@@ -5,6 +5,9 @@ import type { DiaryEntry, Visibility, Weather } from './types';
 import diaryService from './diaryService';
 
 const App = () => {
+  const weatherOptions: Weather[] = ['sunny', 'rainy', 'cloudy', 'stormy', 'windy'];
+  const visibilityOptions: Visibility[] = ['great', 'good', 'ok', 'poor'];
+
   const [diaries, setDiaries] = useState<DiaryEntry[]>([]);
   const [date, setDate] = useState('');
   const [weather, setWeather] = useState<Weather>('sunny');
@@ -61,14 +64,38 @@ const App = () => {
       {errorMessage && <p role="alert" style={{ color: 'red' }}>{errorMessage}</p>}
       <form onSubmit={addDiary}>
         <div>
-          <label>Date <input value={date} onChange={event => setDate(event.target.value)} /></label>
+          <label>Date <input type="date" value={date} onChange={event => setDate(event.target.value)} /></label>
         </div>
-        <div>
-          <label>Visibility <input value={visibility} onChange={event => setVisibility(event.target.value as Visibility)} /></label>
-        </div>
-        <div>
-          <label>Weather <input value={weather} onChange={event => setWeather(event.target.value as Weather)} /></label>
-        </div>
+        <fieldset>
+          <legend>Visibility</legend>
+          {visibilityOptions.map(option => (
+            <label key={option}>
+              <input
+                type="radio"
+                name="visibility"
+                value={option}
+                checked={visibility === option}
+                onChange={() => setVisibility(option)}
+              />
+              {option}
+            </label>
+          ))}
+        </fieldset>
+        <fieldset>
+          <legend>Weather</legend>
+          {weatherOptions.map(option => (
+            <label key={option}>
+              <input
+                type="radio"
+                name="weather"
+                value={option}
+                checked={weather === option}
+                onChange={() => setWeather(option)}
+              />
+              {option}
+            </label>
+          ))}
+        </fieldset>
         <div>
           <label>Comment <input value={comment} onChange={event => setComment(event.target.value)} /></label>
         </div>
