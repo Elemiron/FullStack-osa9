@@ -17,3 +17,6 @@ export interface Patient {
 
 // T.9.12: henkilötunnus ei kuulu julkiseen potilaslistaan
 export type PublicPatient = Omit<Patient, 'ssn'>;
+
+// T.9.13: uudella potilaalla ei vielä ole palvelimen luomaa tunnistetta
+export type NewPatient = Omit<Patient, 'id'>;
