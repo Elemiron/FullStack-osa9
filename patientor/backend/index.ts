@@ -3,6 +3,8 @@ import express from 'express';
 import cors from 'cors';
 // T.9.11: diagnoosien reitit omassa tiedostossa
 import diagnosisRouter from './src/routes/diagnoses.ts';
+// T.9.12: potilaiden reitit omaan routeriin
+import patientRouter from './src/routes/patients.ts';
 
 // T.9.9: pistetään Patientorin backend pystyyn
 const app = express();
@@ -20,6 +22,8 @@ app.get('/api/ping', (_req, res) => {
 
 // T.9.11: ohjataan diagnoosipyynnöt omalle routerille
 app.use('/api/diagnoses', diagnosisRouter);
+// T.9.12: potilaslistan osoite frontendille
+app.use('/api/patients', patientRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

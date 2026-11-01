@@ -1,5 +1,8 @@
 // T.9.11: kurssin potilasdata myöhempiä tehtäviä varten
-const data = [
+import type { Patient } from '../src/types.ts';
+
+// T.9.12: tyypitetään myös valmiit potilastiedot
+const data: Patient[] = [
     {
         "id": "d2773336-f723-11e9-8f0b-362b9e155667",
         "name": "John McClane",
