@@ -1,0 +1,17 @@
+import express from 'express';
+
+// T.9.9: pistetään Patientorin backend pystyyn
+const app = express();
+app.use(express.json());
+
+// T.9.9: frontend odottaa backendia portissa 3001
+const PORT = 3001;
+
+// T.9.9: tällä voi tsekata että backend vastaa
+app.get('/api/ping', (_req, res) => {
+  res.send('pong');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
