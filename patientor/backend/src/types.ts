@@ -5,13 +5,22 @@ export interface Diagnosis {
   latin?: string;
 }
 
+// T.9.14: sallitut arvot ja tyyppi pysyvät samassa paikassa
+export const Gender = {
+  Male: 'male',
+  Female: 'female',
+  Other: 'other',
+} as const;
+
+export type Gender = typeof Gender[keyof typeof Gender];
+
 // T.9.12: potilaan perustiedot
 export interface Patient {
   id: string;
   name: string;
   dateOfBirth: string;
   ssn: string;
-  gender: string;
+  gender: Gender;
   occupation: string;
 }
 
