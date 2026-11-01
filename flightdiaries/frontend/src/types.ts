@@ -7,3 +7,7 @@ export interface DiaryEntry {
   weather: Weather;
   visibility: Visibility;
 }
+
+export interface NewDiaryEntry extends Omit<DiaryEntry, 'id'> {
+  comment: string;
+}
