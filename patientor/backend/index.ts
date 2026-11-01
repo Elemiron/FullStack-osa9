@@ -1,7 +1,11 @@
 import express from 'express';
+// T.9.10: tarvitaan cors kun frontend pyörii eri portissa
+import cors from 'cors';
 
 // T.9.9: pistetään Patientorin backend pystyyn
 const app = express();
+// T.9.10: sallitaan frontendin pyynnöt selaimesta
+app.use(cors());
 app.use(express.json());
 
 // T.9.9: frontend odottaa backendia portissa 3001
