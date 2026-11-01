@@ -1,8 +1,9 @@
 name: Patientor API Tests
 
 on:
+  # T.9.16: ajetaan API-testit kun muutokset pushataan päähaaraan
   push:
-    branches: [ xmain, xmaster ]
+    branches: [ main, master ]
 
 jobs:
   test:
